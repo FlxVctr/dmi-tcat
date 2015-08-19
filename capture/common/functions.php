@@ -1074,11 +1074,18 @@ class Tweet {
             $this->geo_lng = $data["geo"]["coordinates"][1];
         }
         if (isset($data["retweeted_status"])) {
+<<<<<<< HEAD
             $this->text = "RT @" . $data["retweeted_status"]["user"]["screen_name"] . " " . $data["retweeted_status"]["text"];
         }
 	else {
             $this->text = $data["text"];
        	}
+=======
+            $this->text = "RT @" . $data["retweeted_status"]["user"]["screen_name"] . ": " . $data["retweeted_status"]["text"];
+        } else {
+            $this->text = $data["text"];
+        }
+>>>>>>> digitalmethodsinitiative/master
         $this->retweet_id = null;
         if (isset($data["retweeted_status"])) {
             $this->retweet_id = $data["retweeted_status"]["id_str"];
@@ -1099,6 +1106,8 @@ class Tweet {
         } else {
             $this->possibly_sensitive = null;
         }
+        /* Truncated Tweets are a historical attribute. Tweets send (through the API) which exceeded 140 characters got the truncated flag set.
+           This attribute is no longer set true for any new tweets. */
         $this->truncated = $data["truncated"];
         $this->place_ids = array();
         $this->places = array();
